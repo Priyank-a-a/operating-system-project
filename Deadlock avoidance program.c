@@ -85,7 +85,29 @@ int main()
 	        available[i] = maxres[i] - allocation[i];
 	}
  
-	
+	printf("\nAvailable resources:");
+    	for (i = 0; i < resources; i++) 
+	{
+        	printf("\t%d", available[i]);
+    	}
+    	printf("\n");
+ 
+    	while (counter != 0) 
+	{
+        	safe = 0;
+        	for (i = 0; i < processes; i++) 
+		{
+            		if (running[i]) 
+			{
+                		exec = 1;
+                		for (j = 0; j < resources; j++) 
+				{
+                    			if (maximum_claim[i][j] - current[i][j] > available[j]) 
+					{
+                        			exec = 0;
+                        			break;
+                    			}
+                		}
     	
     	return 0;
 }
