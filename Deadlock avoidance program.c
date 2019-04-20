@@ -1,13 +1,18 @@
 #include <stdio.h>
 #include<conio.h>
-int current[5][5], maximum_claim[5][5], available[5];
-int allocation[5] = {0, 0, 0, 0, 0};
-int maxres[5], running[5], safe = 0;
+int current[5][5], maximum_claim[5][5];
+int available[5]; //availabel resources
+int allocation[5] = {0, 0, 0, 0, 0}; //allocated resources to processes
+int max_resources[5]; //maximum resources 
+int running[5]; //running process
+int safe_state = 0; 
 int counter = 0, i, j,exec, resources, processes, k = 1;
  
 int main()
 {
-	printf("\nEnter number of processes: ");
+	printf("***********************************************************************************************************");
+	printf("Enter number of processes less than or equal to 5 to get results faster and understand the working easily\n");
+	printf("Enter number of processes: \n");
     	scanf("%d", &processes);
  
     	for (i = 0; i < processes; i++) 
@@ -16,13 +21,13 @@ int main()
         	counter++;
     	}
  
-    	printf("\nEnter number of resources: ");
+    	printf("\nEnter number of resources: "); //how many processes do you want to apply algo to
     	scanf("%d", &resources);
  
-    	printf("\nEnter maximum resources:");
+    	printf("\nEnter maximum resources:"); //enter the maximum resources
     	for (i = 0; i < resources; i++) 
 	{ 
-	        scanf("%d", &maxres[i]);
+	        scanf("%d", &max_resources[i]);
     	}
  
    	printf("\nEnter Allocated Resources for all your processes:\n");
@@ -44,7 +49,7 @@ int main()
     	}
 	for (i = 0; i < resources; i++) 
 	{
-	        printf("\t%d", maxres[i]);
+	        printf("\t%d", max_resources[i]);
 	}
  
     	printf("\nThe Allocated Resource Table:\n");
@@ -82,7 +87,7 @@ int main()
  
     	for (i = 0; i < resources; i++) 
 	{
-	        available[i] = maxres[i] - allocation[i];
+	        available[i] = max_resources[i] - allocation[i];
 	}
  
 	printf("\nAvailable resources:");
@@ -94,7 +99,7 @@ int main()
  
     	while (counter != 0) 
 	{
-        	safe = 0;
+        	safe_state = 0;
         	for (i = 0; i < processes; i++) 
 		{
             		if (running[i]) 
@@ -108,12 +113,12 @@ int main()
                         			break;
                     			}
                 		}
-    	if (exec) 
+    	if (exec)                                   //if process gets executed
 				{
                     			printf("\nProcess%d is executing\n", i + 1);
                     			running[i] = 0;
                     			counter--;
-                    			safe = 1;
+                    			safe_state = 1;
  
                     			for (j = 0; j < resources; j++) 
 					{
@@ -123,7 +128,7 @@ int main()
                 		}
             		}
         	}
-        	if (!safe) 
+        	if (!safe_state)  //if the system is not in safe state
 		{
             		printf("\nThe processes are in unsafe state.\n");
             		break;
