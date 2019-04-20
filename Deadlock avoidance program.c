@@ -66,7 +66,24 @@ int main()
         	}
         	printf("\n");
     	}
+ for (i = 0; i < processes; i++) 
+	{
+        	for (j = 0; j < resources; j++) 
+		{
+            		allocation[j] += current[i][j];
+        	}
+    	}
  
+    	printf("\nAllocated resources:");
+    	for (i = 0; i < resources; i++) 
+	{
+        	printf("\t%d", allocation[i]);
+    	}
+ 
+    	for (i = 0; i < resources; i++) 
+	{
+	        available[i] = maxres[i] - allocation[i];
+	}
  
 	
     	
